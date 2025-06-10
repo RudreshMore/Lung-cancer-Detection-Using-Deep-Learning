@@ -1,0 +1,32 @@
+
+CREATE DATABASE lung_cancer_db;
+
+USE lung_cancer_db;
+
+CREATE TABLE `patient` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `age` int(11) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `mobile` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+);
+
+CREATE TABLE `scan_result` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) NOT NULL,
+  `image_filename` varchar(255) NOT NULL,
+  `result` varchar(100) NOT NULL,
+  `date_uploaded` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `patient_id` (`patient_id`),
+  CONSTRAINT `scan_result_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`)
+);

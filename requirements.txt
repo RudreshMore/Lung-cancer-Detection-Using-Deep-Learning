@@ -1,0 +1,4 @@
+flask
+werkzeug
+tensorflow   # if using a CNN model
+pillow
